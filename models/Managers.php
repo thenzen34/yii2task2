@@ -29,7 +29,7 @@ class Managers extends ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['salary'], 'default', 'value' => null],
+            [['salary'], 'default', 'value' => 0],
             [['salary'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
