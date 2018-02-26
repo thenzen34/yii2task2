@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$dbLocal = require (__DIR__ . '/db-local.php');
 
 $config = [
     'id' => 'basic-console',
@@ -24,16 +25,14 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
     ],
     'params' => $params,
-    /*
     'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationTable' => 'yii2task2.migration',
         ],
     ],
-    */
 ];
 
 if (YII_ENV_DEV) {
@@ -44,4 +43,4 @@ if (YII_ENV_DEV) {
     ];
 }
 
-return $config;
+return \yii\helpers\ArrayHelper::merge($config, $db, $dbLocal);
