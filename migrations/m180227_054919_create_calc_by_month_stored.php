@@ -43,7 +43,7 @@ BEGIN
             where date >= date_from and date < date_to
             group by manager_id
         ) t
-    left join yii2task2.bonus b on t.calls >= b.from and t.calls <= b.to;
+    left join yii2task2.bonus b on t.calls >= b.from and t.calls < b.to;
     
     UPDATE "yii2task2"."calls_by_month" self
     SET 
