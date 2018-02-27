@@ -55,4 +55,14 @@ class Managers extends ActiveRecord
     {
         return new ManagersQuery(get_called_class());
     }
+
+    /**
+     * @return int[]
+     */
+    public static function getAllIds()
+    {
+        return self::find()
+            ->select(['id'])
+            ->column();
+    }
 }

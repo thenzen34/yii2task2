@@ -74,4 +74,14 @@ class CallsByMonth extends ActiveRecord
     {
         return $this->hasOne(Bonus::class, ['id' => 'type']);
     }
+
+    /**
+     * @param string $date
+     * @return int
+     * @throws \yii\db\Exception
+     */
+    public static function runStored($date)
+    {
+        return self::getDb()->createCommand("select yii2task2.prc_calc_by_month_pregen('{$date}'::date)")->execute();
+    }
 }

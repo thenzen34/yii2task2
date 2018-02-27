@@ -65,4 +65,14 @@ class CallsByDay extends ActiveRecord
     {
         return $this->hasOne(Managers::class, ['id' => 'type']);
     }
+
+    /**
+     * @param string $date
+     * @return int
+     * @throws \yii\db\Exception
+     */
+    public static function runStored($date)
+    {
+        return self::getDb()->createCommand("select yii2task2.prc_calc_by_day_pregen('{$date}'::date)")->execute();
+    }
 }

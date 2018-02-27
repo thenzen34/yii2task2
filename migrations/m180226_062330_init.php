@@ -12,7 +12,7 @@ class m180226_062330_init extends Migration
      */
     public function safeUp()
     {
-
+        //$this->execute('CREATE SCHEMA yii2task2');
     }
 
     /**
