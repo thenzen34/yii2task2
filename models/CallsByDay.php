@@ -63,7 +63,7 @@ class CallsByDay extends ActiveRecord
 
     public function getManagers()
     {
-        return $this->hasOne(Managers::class, ['id' => 'type']);
+        return $this->hasOne(Managers::class, ['id' => 'manager_id']);
     }
 
     /**

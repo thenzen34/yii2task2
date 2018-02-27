@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Calls;
 use Yii;
 use app\models\Managers;
 use app\modules\admin\models\ManagersSearch;
@@ -123,5 +124,22 @@ class ManagersController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * +1 к совершенным звонкам
+     * 
+     * @param $id
+     * @return \yii\web\Response
+     */
+    public function actionCreateCall($id)
+    {
+        $model = new Calls();
+        $model->manager_id = $id;
+        if($model->save()) {
+            Yii::$app->getSession()->addFlash('new_call_create');
+        }
+
+        return $this->redirect(['view', 'id' => $id]);
     }
 }

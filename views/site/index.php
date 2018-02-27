@@ -2,52 +2,55 @@
 
 /* @var $this yii\web\View */
 
+use app\models\Managers;
+
 $this->title = 'My Yii Application';
+
+/* @var Managers[] $managers */
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <p>Информация по зп за послдений месяц</p>
     </div>
 
     <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Менеджер</th>
+                <th>Оклад</th>
+                <th>Звонков совершенно</th>
+                <th>Бонус</th>
+                <th>Итого:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($managers as $manager) {
+                $has_bonus = $manager->lastMonth->bonus !== null;
+                $total = $manager->salary;
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
+                if ($has_bonus) {
+                    $total += $manager->lastMonth->bonus->salary;
+                }
+                ?>
+                <tr class="active">
+                    <th scope="row"><?= $manager->id ?></th>
+                    <td><?= $manager->name ?></td>
+                    <td><?= $manager->salary ?></td>
+                    <td><?= $manager->lastMonth->calls ?></td>
+                    <td><?= $has_bonus ? (number_format($manager->lastMonth->bonus->salary, 0,
+                                ' ', ',') . ' (' . $manager->lastMonth->bonus->name . ')') : 0 ?></td>
+                    <td><?= number_format($total, 0, ' ', ',') ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
 
     </div>
 </div>

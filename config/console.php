@@ -30,7 +30,7 @@ $config = [
     'controllerMap' => [
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
-            'migrationTable' => 'yii2task2.migration',
+            //'migrationTable' => 'yii2task2.migration',
         ],
     ],
 ];

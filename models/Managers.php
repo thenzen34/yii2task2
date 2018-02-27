@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\models\query\ManagersQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "yii2task2.managers".
@@ -11,6 +12,9 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $name
  * @property int $salary
+ *
+ * @property CallsByDay[] $callsByDay
+ * @property CallsByMonth $lastMonth
  */
 class Managers extends ActiveRecord
 {
@@ -54,6 +58,18 @@ class Managers extends ActiveRecord
     public static function find()
     {
         return new ManagersQuery(get_called_class());
+    }
+
+    public function getStatByDay()
+    {
+        return $this->hasMany(CallsByDay::class, ['manager_id' => 'id'])
+            ->andWhere(['>=', 'date', new Expression("now()-'1 month'::interval")]);
+    }
+
+    public function getLastMonth()
+    {
+        return $this->hasOne(CallsByMonth::class, ['manager_id' => 'id'])
+            ->andWhere(['>=', 'date', new Expression("now()-'1 month'::interval")]);
     }
 
     /**

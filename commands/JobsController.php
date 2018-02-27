@@ -25,6 +25,9 @@ class JobsController extends Controller
      */
     public function actionInit()
     {
+        /**
+         * Для интереса создадим еще пару менеджеров бонусов и звонков
+         */
         Managers::deleteAll();
 
         $model = new Managers();
@@ -42,6 +45,16 @@ class JobsController extends Controller
         $model->salary = 40000;
         $model->save();
 
+        $model = new Managers();
+        $model->name = 'Еще один менеджер 1';
+        $model->salary = 10000;
+        $model->save();
+
+        $model = new Managers();
+        $model->name = 'Еще один менеджер 2';
+        $model->salary = 10000;
+        $model->save();
+
         Bonus::deleteAll();
 
         $columns = [
@@ -53,18 +66,32 @@ class JobsController extends Controller
         ];
         $rows = [
             [
-                'name' => 'Начальная',
-                'salary' => 100,
+                'name' => 'Начальная 1',
+                'salary' => 50,
 
                 'from' => 0,
+                'to' => 50,
+            ],
+            [
+                'name' => 'Начальная 2',
+                'salary' => 100,
+
+                'from' => 50,
                 'to' => 100,
             ],
             [
-                'name' => 'Средняя',
+                'name' => 'Средняя 1',
                 'salary' => 200,
 
                 'from' => 100,
                 'to' => 200,
+            ],
+            [
+                'name' => 'Средняя 2',
+                'salary' => 300,
+
+                'from' => 200,
+                'to' => 300,
             ],
             [
                 'name' => 'Высшая',
@@ -87,7 +114,7 @@ class JobsController extends Controller
      * @return int
      * @throws \yii\db\Exception
      */
-    public function actionGenerate($cntCalls = 5400)
+    public function actionGenerate($cntCalls = 6000)
     {
         $date_to = time();
         $date_from = strtotime('- 6 month');

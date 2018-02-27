@@ -67,12 +67,12 @@ class CallsByMonth extends ActiveRecord
 
     public function getManagers()
     {
-        return $this->hasOne(Managers::class, ['id' => 'type']);
+        return $this->hasOne(Managers::class, ['id' => 'manager_id']);
     }
 
     public function getBonus()
     {
-        return $this->hasOne(Bonus::class, ['id' => 'type']);
+        return $this->hasOne(Bonus::class, ['id' => 'bonus_id']);
     }
 
     /**
