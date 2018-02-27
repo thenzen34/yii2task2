@@ -16,7 +16,7 @@ class m180227_051712_add_dt_index_to_calls_table extends Migration
         $this->createIndex(
             'idx-calls-dt_date',
             'yii2task2.calls',
-            new Expression('("dt"::date)')
+            [new Expression('("dt"::date)')]
         );
     }
 

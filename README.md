@@ -14,6 +14,11 @@ Yii2Task2
 Установить зависимости
     
     composer install
+
+Дать права 777 на папки web/assets и runtime
+
+    chmod 777 web/assets
+    chmod 777 runtime
     
 НАСТРОЙКА
 --------
@@ -43,11 +48,14 @@ return [
     
     php job/generate
 
+Возможно сгенерировать стату заново и в других объемах
+
+    php job/generate 7000
 
 УПРАВЛЕНИЕ
 --------
 
-Создание звонков
+Создание звонков в течении дня
 
     Admin -> Managers -> View -> Create Call
     
