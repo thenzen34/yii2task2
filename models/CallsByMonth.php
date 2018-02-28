@@ -51,7 +51,7 @@ class CallsByMonth extends ActiveRecord
             'id' => 'ID',
             'manager_id' => 'Manager ID',
             'date' => 'Date',
-            'calls' => 'Calls',
+            'calls' => 'Звонков совершенно',
             'bonus_id' => 'Bonus ID',
         ];
     }

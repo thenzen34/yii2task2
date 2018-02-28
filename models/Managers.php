@@ -46,8 +46,8 @@ class Managers extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'salary' => 'Salary',
+            'name' => 'Менеджер',
+            'salary' => 'Оклад',
         ];
     }
 

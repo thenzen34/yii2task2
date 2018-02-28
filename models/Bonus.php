@@ -45,7 +45,7 @@ class Bonus extends ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'salary' => 'Salary',
+            'salary' => 'Бонус',
             'from' => 'From',
             'to' => 'To',
         ];
